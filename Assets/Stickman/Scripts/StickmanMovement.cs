@@ -3,13 +3,12 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.OnScreen;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CharacterController))]
 public class StickmanMovement : MonoBehaviour
 {
     [SerializeField]
     private float rotationSpeed;
 
-
-    [SerializeField]
     private Animator animator;
     private CharacterController characterController;
     private float ySpeed;
@@ -19,14 +18,8 @@ public class StickmanMovement : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
-    }
-
-    void Start()
-    {
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
-        OnScreenStick stick;
-        stick.
     }
 
     void Update()
@@ -69,17 +62,6 @@ public class StickmanMovement : MonoBehaviour
         characterController.Move(velocity);
     }
 
-    private void OnApplicationFocus(bool focus)
-    {
-        if (focus)
-        {
-            //Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            //Cursor.lockState = CursorLockMode.None;
-        }
-    }
     public void Move(InputAction.CallbackContext callback)
     {
         Vector2 input =  callback.ReadValue<Vector2>();
