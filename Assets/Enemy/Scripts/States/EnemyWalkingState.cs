@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyWalkingState : IEnemyState
 {
@@ -34,6 +35,9 @@ public class EnemyWalkingState : IEnemyState
                 controller.NavMeshAgent.remainingDistance / controller.NavMeshAgent.stoppingDistance
             );
         }
-        controller.StickmanMovement.Move(moveInput / Time.deltaTime);
+        moveInput /= Time.deltaTime;
+        Debug.Log(controller.NavMeshAgent.remainingDistance);
+        Debug.Log(moveInput);
+        controller.StickmanMovement.Move(moveInput, false);
     }
 }

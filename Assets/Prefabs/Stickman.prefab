@@ -877,7 +877,7 @@ GameObject:
   - component: {fileID: 7450312686099438886}
   - component: {fileID: 5205520440384548686}
   - component: {fileID: 1829925719584253852}
-  - component: {fileID: 5853685775402800586}
+  - component: {fileID: 8952644074994307309}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Untagged
@@ -960,7 +960,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5853685775402800586
+--- !u!114 &8952644074994307309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -969,10 +969,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5418833315014261322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 287a37ba0727c86448f95428f68b959b, type: 3}
+  m_Script: {fileID: 11500000, guid: c6d2b00f81b8fac4cae0604517a58b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actions: []
 --- !u!1 &5518473848904234687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,8 +1055,6 @@ MonoBehaviour:
         m_Calls: []
     BeforeDelay: 0
     AfterDelay: 0
-  BeforeDelay: 0
-  AfterDelay: 0
 --- !u!1 &6067593614353542945
 GameObject:
   m_ObjectHideFlags: 0

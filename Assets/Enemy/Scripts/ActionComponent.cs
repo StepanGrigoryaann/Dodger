@@ -3,19 +3,20 @@ using UnityEngine;
 public class ActionComponent : MonoBehaviour, IEnemyTarget
 {
     [SerializeField] private ActionType actionType;
-    [SerializeField] private Action action;
-    private void OnValidate()
+    [SerializeField] public Action action;
+
+    [SerializeField] private float beforeDelay;
+    [SerializeField] private float afterDelay;
+
+    private void Awake()
     {
         switch (actionType)
         {
             case ActionType.NoAction:
-                action = new Action(); break;
+                action = null; break;
             case ActionType.WalkAction:
-                action = new WalkAction(this); break;
+                action = new WalkAction(beforeDelay, afterDelay, this); break;
         }
-    }
-    private void Awake()
-    {
         transform.parent = null;
     }
 

@@ -1,17 +1,13 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
-[System.Serializable]
-public class Action
+public abstract class Action
 {
-    public UnityEvent OnActionFinished;
-    [SerializeField] protected float BeforeDelay;
-    [SerializeField] protected float AfterDelay;
+    protected float beforeDelay;
+    protected float afterDelay;
     public virtual IEnumerator PerformAction(EnemyController controller)
     {
-        yield return new WaitForSeconds(BeforeDelay);
-        yield return new WaitForSeconds(AfterDelay);
-        OnActionFinished?.Invoke();
+        yield return new WaitForSeconds(beforeDelay);
+        yield return new WaitForSeconds(afterDelay);
     }
 }

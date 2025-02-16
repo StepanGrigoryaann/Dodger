@@ -14,6 +14,7 @@ public class StickmanMovement : MonoBehaviour
     private float verticalInput = 0;
 
     private bool isCrouching = false;
+    private bool canRun = true;
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -31,10 +32,9 @@ public class StickmanMovement : MonoBehaviour
         stickmanController.Update();
         Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
         float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
-        animator.SetFloat("Input Magnitude", inputMagnitude, 0.05f, Time.deltaTime);
         bool isRunning = inputMagnitude > 0.7f;
         animator.SetBool("IsCrouching", isCrouching);
-        animator.SetBool("IsRunning", isRunning);
+        animator.SetBool("IsRunning", isRunning && canRun);
         
         movementDirection.Normalize();
 
@@ -48,6 +48,11 @@ public class StickmanMovement : MonoBehaviour
         {
             animator.SetBool("IsMoving", false);
         }
+        if(!canRun)
+        {
+            inputMagnitude = 0;
+        }
+        animator.SetFloat("Input Magnitude", inputMagnitude, 0.05f, Time.deltaTime);
     }
 
     private void OnAnimatorMove()
@@ -55,10 +60,11 @@ public class StickmanMovement : MonoBehaviour
         stickmanController.OnAnimatorMove();
     }
 
-    public void Move(Vector2 input)
+    public void Move(Vector2 input, bool canRun = true)
     {
         horizontalInput = input.x;
         verticalInput = input.y;
+        this.canRun = canRun;
     }
 
     public void ToggleCrouching()

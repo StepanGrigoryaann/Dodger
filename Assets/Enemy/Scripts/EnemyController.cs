@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour, IStickmanController
     public Animator Animator => animator;
     private Animator animator;
 
+    [SerializeField] private float walkingStoppingDistance = 0.5f;
+    [SerializeField] private float runningStoppingDistance = 1f;
     [SerializeField] private List<ActionComponent> actions = new();
 
     private IEnemyState currentState;
@@ -24,7 +26,6 @@ public class EnemyController : MonoBehaviour, IStickmanController
     private EnemyWalkingState enemyWalkingState;
 
     private IEnemyTarget enemyTarget;
-    public UnityEvent onStateChange { get; private set; } = new();
 
     private void OnValidate()
     {
@@ -50,7 +51,7 @@ public class EnemyController : MonoBehaviour, IStickmanController
     {
         enemyIdleState = new(this);
         enemyWalkingState = new(this);
-        SetCurrentState(enemyIdleState);
+        SetCurrentState(enemyWalkingState);
     }
     public void SetCurrentState(IEnemyState state)
     {
@@ -59,6 +60,7 @@ public class EnemyController : MonoBehaviour, IStickmanController
     public void SetTarget(IEnemyTarget target)
     {
         enemyTarget = target;
+        navMeshAgent.SetDestination(enemyTarget.Position());
     }
     void IStickmanController.OnAnimatorMove()
     {
@@ -72,7 +74,8 @@ public class EnemyController : MonoBehaviour, IStickmanController
     {
         foreach (var action in actions)
         {
-            yield return action.GetAction.PerformAction(this);
+            yield return (action.GetAction.PerformAction(this));
+            Debug.LogError("FINISHED");
         }
     }
 }
